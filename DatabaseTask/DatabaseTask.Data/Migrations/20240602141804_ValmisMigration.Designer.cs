@@ -4,6 +4,7 @@ using DatabaseTask.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatabaseTask.Data.Migrations
 {
     [DbContext(typeof(DatabaseTaskDbContext))]
-    partial class DatabaseTaskDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240602141804_ValmisMigration")]
+    partial class ValmisMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +44,7 @@ namespace DatabaseTask.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AccessLevel");
+                    b.ToTable("AccessLevels");
                 });
 
             modelBuilder.Entity("DatabaseTask.Core.Domain.Children", b =>
@@ -143,7 +145,7 @@ namespace DatabaseTask.Data.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("HealthCheck");
+                    b.ToTable("HealthChecks");
                 });
 
             modelBuilder.Entity("DatabaseTask.Core.Domain.JobTenure", b =>
@@ -176,7 +178,7 @@ namespace DatabaseTask.Data.Migrations
 
                     b.HasIndex("PositionId");
 
-                    b.ToTable("JobTenure");
+                    b.ToTable("JobTenures");
                 });
 
             modelBuilder.Entity("DatabaseTask.Core.Domain.LoanableItems", b =>
@@ -194,7 +196,7 @@ namespace DatabaseTask.Data.Migrations
 
                     b.HasKey("LoanableItemId");
 
-                    b.ToTable("LoanableItem");
+                    b.ToTable("LoanableItems");
                 });
 
             modelBuilder.Entity("DatabaseTask.Core.Domain.Loaning", b =>
@@ -221,7 +223,7 @@ namespace DatabaseTask.Data.Migrations
 
                     b.HasIndex("LoanableItemsId");
 
-                    b.ToTable("Loaning");
+                    b.ToTable("Loanings");
                 });
 
             modelBuilder.Entity("DatabaseTask.Core.Domain.Position", b =>
@@ -243,7 +245,7 @@ namespace DatabaseTask.Data.Migrations
 
                     b.HasKey("PositionId");
 
-                    b.ToTable("Position");
+                    b.ToTable("Positions");
                 });
 
             modelBuilder.Entity("DatabaseTask.Core.Domain.Request", b =>
@@ -271,7 +273,7 @@ namespace DatabaseTask.Data.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Request");
+                    b.ToTable("Requests");
                 });
 
             modelBuilder.Entity("DatabaseTask.Core.Domain.SickLeave", b =>
@@ -293,10 +295,10 @@ namespace DatabaseTask.Data.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("SickLeave");
+                    b.ToTable("SickLeaves");
                 });
 
-            modelBuilder.Entity("DatabaseTask.Core.Domain.Suggestion_hints", b =>
+            modelBuilder.Entity("DatabaseTask.Core.Domain.Suggestion", b =>
                 {
                     b.Property<Guid>("SuggestionId")
                         .ValueGeneratedOnAdd()
@@ -316,7 +318,7 @@ namespace DatabaseTask.Data.Migrations
 
                     b.HasKey("SuggestionId");
 
-                    b.ToTable("Suggestions_hints");
+                    b.ToTable("Suggestions");
                 });
 
             modelBuilder.Entity("DatabaseTask.Core.Domain.Vacation", b =>
@@ -335,13 +337,14 @@ namespace DatabaseTask.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Type")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("VacationId");
 
                     b.HasIndex("EmployeesId");
 
-                    b.ToTable("Vacation");
+                    b.ToTable("Vacations");
                 });
 
             modelBuilder.Entity("DatabaseTask.Core.Domain.Children", b =>
